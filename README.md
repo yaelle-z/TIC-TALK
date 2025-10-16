@@ -1,137 +1,127 @@
-# Analyse multimodale du stand-up : Poses, Thèmes, Rires
+# Multimodal Analysis of Stand-up Comedy: Poses, Topics, Laughter
 
-Ce dépôt contient uniquement le code final du projet d’analyse multimodale du stand-up.
-Les données volumineuses (vidéos, fichiers audio, `.srt` complets), les modèles entraînés et les résultats intermédiaires lourds sont hébergés séparément sur un drive.
+This repository contains **only the final code** of the multimodal analysis project on stand-up comedy.
+Large data files (videos, audio, full `.srt` subtitles), trained models, and heavy intermediate results are hosted separately on a cloud drive.
 
-Les notebooks sont organisés en fonction de l'étape de l'analyse
-1. **La gestuelle (poses)** des humoristes sur scène.
-2. **Les thématiques (topics)** abordées dans leurs spectacles.
-3. **Les rires** déclenchés dans le public.
----
-
-### 1.1 Analyse de la gestuelle (Poses)
-
-#### `echantillonage_filemp4_toimages.ipynb`
-- **Entrée** : vidéos brutes (`.mp4`) du corpus (non incluses).
-- **Sortie** : série d’images extraites à intervalles réguliers (par exemple 1 image/sec).
-- **Rôle** : créer un échantillon d’images représentatif pour chaque spectacle, servant de base à l’annotation et à l’analyse ultérieure.
-
-#### `selection_image_aleatoirement_pour_annoter.ipynb`
-- **Entrée** : dossier contenant les images extraites des vidéos.
-- **Sortie** : sous-échantillon aléatoire d’images (CSV listant les fichiers choisis et copies dans un dossier dédié).
-- **Rôle** : réduire la quantité d’images à annoter manuellement tout en conservant la diversité des poses et des plans.
-
-#### `entrainement_modele_classification_de_plan.ipynb`
-- **Entrée** : images annotées avec leur type de plan + CSV d’annotations.
-- **Sortie** : modèle YOLO entraîné (poids `.pt`) pour classer automatiquement les images par type de plan.
-- **Rôle** : automatiser la détection du type de plan (ex. plein-pied, plan taille) dans les images extraites.
-
-#### `application_modele_classification_de_plans(2).ipynb`
-- **Entrée** : poids du modèle YOLO entraîné + images extraites.
-- **Sortie** : images triées dans des dossiers distincts selon le type de plan détecté.
-- **Rôle** : filtrer automatiquement les images pour isoler celles utiles à l’analyse des poses (plein-pied).
-
-#### `image_to_csv_keypoints.py`
-- **Entrée** : images plein-pied issues de l’étape précédente.
-- **Sortie** : un fichier CSV par image contenant :
-  - Les coordonnées x, y de 17 points clés du corps (nez, yeux, épaules, coudes, poignets, hanches, genoux, chevilles).
-  - Les coordonnées de la boîte englobante (bounding box).
-- **Rôle** : convertir les images en données numériques structurées exploitables pour l’analyse statistique.
-
-#### `capture_to_pose_valeurs_dans_csv.ipynb`
-- **Entrée / Sortie** : identique au script précédent.
-- **Rôle** : version notebook pour exécuter l’extraction des keypoints de manière interactive et vérifier visuellement les résultats.
-
-#### `csv_poses_to_cluster.ipynb`
-- **Entrée** : ensemble des CSV de keypoints.
-- **Sortie** :
-  - Groupes de poses similaires (clusters) calculés par clustering.
-  - Moyenne des coordonnées pour chaque cluster.
-  - Visualisations des poses moyennes.
-- **Rôle** : identifier les postures récurrentes et caractériser la gestuelle typique.
-
-#### `classifications_de_poses_images_trieesenfcduplan_to_modele_to_csv_dimages_trieesenfctdelapose.ipynb`
-- **Entrée** : images triées par type de plan + modèle de classification de poses.
-- **Sortie** : CSV listant chaque image et la classe de pose attribuée par le modèle.
-- **Rôle** : affiner la typologie gestuelle en classifiant chaque posture détectée dans le corpus.
+The notebooks are organized according to the main steps of analysis:
+1. **Gestures (poses)** performed by comedians on stage 
+2. **Topics** addressed in their performances 
+3. **Laughter** triggered in the audience 
 
 ---
 
-### 1.2 Analyse des thèmes
+## 1.1 Gesture Analysis (Poses)
 
-#### `nettoyage_fichiers_srt.ipynb`
-- **Entrée** : fichiers `.srt` bruts des spectacles.
-- **Sortie** : `.srt` nettoyés (texte uniquement, mise en forme standardisée, suppression des balises).
-- **Rôle** : préparer les transcriptions textuelles pour l’analyse en traitement automatique du langage.
+### `echantillonage_filemp4_toimages.ipynb`
+- **Input**: Raw video files (`.mp4`) from the corpus (not included)
+- **Output**: A series of images extracted at regular intervals (e.g., 1 frame/second)
+- **Purpose**: Generate a representative sample of frames for each show, to be used for annotation and later analysis
 
-#### `notebook_topic_model_REUSSI.ipynb`
-- **Entrée** : fichiers `.srt` nettoyés.
-- **Sortie** :
-  - Attribution d’un topic à chaque segment temporel.
-  - Visualisations de la dynamique thématique.
-  - Export des résultats au format CSV.
-- **Rôle** : identifier les thèmes dominants dans chaque spectacle à l’aide de BERTopic et analyser leur évolution dans le temps.
+### `selection_image_aleatoirement_pour_annoter.ipynb`
+- **Input**: Folder containing the extracted video frames
+- **Output**: Random subsample of images (CSV of selected files + copies in a dedicated folder)
+- **Purpose**: Reduce the number of images to annotate while maintaining diversity in poses and camera shots
 
----
+### `entrainement_modele_classification_de_plan.ipynb`
+- **Input**: Annotated images with shot types + annotation CSV
+- **Output**: Trained YOLO model (`.pt` weights) for shot-type classification
+- **Purpose**: Automate the detection of camera shots (e.g., full-body, medium shots) in the extracted images
 
-### 1.3 Analyse des rires
+### `application_modele_classification_de_plans(2).ipynb`
+- **Input**: Trained YOLO weights + extracted images
+- **Output**: Images sorted into folders based on predicted shot type
+- **Purpose**: Automatically isolate full-body shots for gesture analysis
 
-#### `detection_de_rire_whisper_at.py`
-- **Entrée** : fichiers audio ou vidéo (`.mp3`, `.wav`, `.mp4`, `.m4a`).
-- **Sortie** : CSV listant pour chaque rire :
-  - Horodatage de début et de fin.
-  - Type de rire (selon la classification Whisper-AT).
-  - Score de confiance.
-- **Rôle** : détecter automatiquement les rires dans l’audio des spectacles avec Whisper-AT.
+### `image_to_csv_keypoints.py`
+- **Input**: Full-body images
+- **Output**: One CSV per image with:
+  - x, y coordinates of 17 keypoints (nose, eyes, shoulders, elbows, wrists, hips, knees, ankles)
+  - Bounding box coordinates
+- **Purpose**: Convert images into structured numerical data for statistical analysis
 
-#### `calcul_statistique_rire.ipynb`
-- **Entrée** : CSV de rires détectés.
-- **Sortie** : tableau de métriques par spectacle (nombre total de rires, durée cumulée, densité).
-- **Rôle** : quantifier et comparer la fréquence des rires entre spectacles.
+### `capture_to_pose_valeurs_dans_csv.ipynb`
+- **Input/Output**: Same as previous script
+- **Purpose**: Notebook version for interactive keypoint extraction and visual checking
 
-#### `représentation_rires_dans_le_temps_dapres_srt_sourds.ipynb`
-- **Entrée** : fichiers `.srt` pour sourds/malentendants contenant des mentions explicites de rires.
-- **Sortie** : courbes représentant la distribution des rires dans le temps.
-- **Rôle** : comparer la détection audio des rires aux mentions présentes dans les sous-titres.
+### `csv_poses_to_cluster.ipynb`
+- **Input**: All CSV files of body keypoints
+- **Output**:
+  - Clusters of similar poses (via clustering)
+  - Mean coordinates per cluster
+  - Visualizations of average poses
+- **Purpose**: Identify recurring postures and describe typical gesture patterns
 
-#### `rires_poses_to_statistiques.ipynb`
-- **Entrée** : données issues de la détection des rires + données de classification de poses.
-- **Sortie** : graphiques et tableaux croisant la densité de rires et les types de poses.
-- **Rôle** : analyser les corrélations entre la gestuelle et le déclenchement du rire.
-
----
-
-### 1.4 Visualisation et croisement
-
-#### `code_visualisation_clustering.ipynb`
-- **Entrée** :
-  - Rires : dossier de CSV par spectacle (`*_laughs.csv`).
-  - Poses : `matrice_poses_par_spectacle_2.csv`.
-  - Thèmes : `matrice_topics_par_spectacle.csv`.
-- **Sortie** :
-  - Graphiques de distribution pour chaque variable (barplots par spectacle).
-- **Rôle** : visualiser séparément la répartition des rires, poses et thèmes sur l’ensemble du corpus.
-
-#### `codecroismentfinalvaribales.ipynb`
-- **Entrée** :
-  - CSV de rires par spectacle.
-  - Fichier CSV de classification de poses pour l’ensemble du corpus.
-- **Sortie** :
-  - Tableau temporel fusionnant, pour chaque spectacle :
-    - Présence/absence de rires par seconde.
-    - Geste dominant par seconde.
-  - Graphiques combinant ces deux dimensions.
-- **Rôle** : observer conjointement la dynamique des rires et des gestes dans le temps.
+### `classifications_de_poses_images_trieesenfcduplan_to_modele_to_csv_dimages_trieesenfctdelapose.ipynb`
+- **Input**: Full-body images + pose classification model
+- **Output**: CSV listing each image and the predicted pose class
+- **Purpose**: Refine the gesture typology by classifying all detected postures
 
 ---
 
-## 2. Données et modèles
+## 1.2 Topic Modeling
 
-Les données brutes, modèles et résultats lourds **ne sont pas inclus dans ce dépôt**.  
-Ils sont disponibles sur kDriveà l’adresse suivante :  
- **[[Lien vers le drive](https://drive.google.com/drive/folders/1r7usWBJKX7F751YzaAdnSWIAkO6Xr0S-?usp=sharing)]**
+### `nettoyage_fichiers_srt.ipynb`
+- **Input**: Raw subtitle files (`.srt`)
+- **Output**: Cleaned `.srt` files (text only, standardized formatting, tags removed)
+- **Purpose**: Prepare subtitles for topic modeling (NLP processing)
 
-Ces ressources incluent :.
-- Fichiers `.srt` bruts et nettoyés.
-- Modèles entraînés (YOLO, BERTopic…).
-- Résultats intermédiaires (CSV, figures).
+### `notebook_topic_model_REUSSI.ipynb`
+- **Input**: Cleaned `.srt` files
+- **Output**:
+  - Topic assignment for each time segment
+  - Visualizations of topic dynamics
+  - CSV export of the results
+- **Purpose**: Identify dominant themes in each special using BERTopic and analyze their temporal evolution
+
+---
+
+## 1.3 Laughter Detection
+
+### `detection_de_rire_whisper_at.py`
+- **Input**: Audio or video files (`.mp3`, `.wav`, `.mp4`, `.m4a`)
+- **Output**: CSV listing each detected laugh with:
+  - Start and end timestamps
+  - Laughter type (Whisper-AT classification)
+  - Confidence score
+- **Purpose**: Automatically detect audience laughter using Whisper-AT
+
+### `calcul_statistique_rire.ipynb`
+- **Input**: Laughter CSV files
+- **Output**: Per-show metrics table (total laughs, total duration, density)
+- **Purpose**: Quantify and compare laugh frequency across performances
+
+### `représentation_rires_dans_le_temps_dapres_srt_sourds.ipynb`
+- **Input**: Subtitle files for the hearing-impaired containing explicit mentions of laughter
+- **Output**: Time-distribution plots of laugh mentions
+- **Purpose**: Compare audio-based laughter detection to subtitle annotations
+
+### `rires_poses_to_statistiques.ipynb`
+- **Input**: Laughter detection results + pose classification data
+- **Output**: Plots and tables crossing laughter density and gesture types
+- **Purpose**: Analyze correlations between body movement and audience response
+
+---
+
+## 1.4 Visualization and Cross-analysis
+
+### `code_visualisation_clustering.ipynb`
+- **Input**:
+  - Laughter: CSV folder per show (`*_laughs.csv`)
+  - Poses: `matrice_poses_par_spectacle_2.csv`
+  - Topics: `matrice_topics_par_spectacle.csv`
+- **Output**:
+  - Distribution plots for each variable (bar plots by show)
+- **Purpose**: Visualize the distribution of laughter, poses, and topics across the entire corpus
+
+### `codecroismentfinalvaribales.ipynb`
+- **Input**:
+  - Laughter CSV per show
+  - Global CSV of classified poses
+- **Output**:
+  - Temporal matrix merging, for each show:
+    - Presence/absence of laughter per second
+    - Dominant gesture per second
+  - Combined time-based visualizations
+- **Purpose**: Jointly observe the dynamics of laughter and gestures over time
+
+
