@@ -39,9 +39,14 @@ The notebooks are organized according to the main steps of analysis:
   - Bounding box coordinates
 - **Purpose**: Convert images into structured numerical data for statistical analysis
 
-### `capture_to_pose_valeurs_dans_csv.ipynb`
-- **Input/Output**: Same as previous script
-- **Purpose**: Notebook version for interactive keypoint extraction and visual checking
+### `image_sample_to_csv_poses.ipynb`
+- **Input**: A folder containing `.jpg`, `.png`, or `.jpeg` images of full-body screenshots from stand-up shows.  
+- **Output**: One CSV file per image, saved in the output folder, named `image_name-poses_detectees.csv`. Each row contains:  
+  - Image name  
+  - Bounding box coordinates (`bbox_xmin`, `bbox_ymin`, `bbox_xmax`, `bbox_ymax`)  
+  - 2D coordinates (`x`, `y`) for each keypoint, following this order:  
+    `Nez`, `Oeil_2`, `Oeil_1`, `Oreille_1`, `Oreille_2`, `Epaule_2`, `Epaule_1`, `Coude_2`, `Coude_1`, `Poignet_2`, `Poignet_1`, `Hanche_2`, `Hanche_1`, `Genou_2`, `Genou_1`, `Cheville_2`, `Cheville_1`
+- **Purpose**: Perform pose estimation on a batch of images using `yolov8l-pose.pt` and extract raw, **non-normalized** keypoint coordinates and bounding boxes into separate CSVs for each image.
 
 ### `csv_poses_to_cluster.ipynb`
 - **Input**: All CSV files of body keypoints
