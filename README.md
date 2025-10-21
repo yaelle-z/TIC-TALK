@@ -22,15 +22,17 @@ The notebooks are organized according to the main steps of analysis:
 - **Output**: Random subsample of images (CSV of selected files + copies in a dedicated folder)
 - **Purpose**: Reduce the number of images to annotate while maintaining diversity in poses and camera shots
 
-### `entrainement_modele_classification_de_plan.ipynb`
-- **Input**: Annotated images with shot types + annotation CSV
-- **Output**: Trained YOLO model (`.pt` weights) for shot-type classification
-- **Purpose**: Automate the detection of camera shots (e.g., full-body, medium shots) in the extracted images
+### `yolov8_shot_classifier_training.ipynb`
+- **Input**: Annotated images labeled with shot types + annotation CSV (exported from Label Studio)
+- **Output**: Trained YOLOv8 classification model (`.pt` weights) for shot-type prediction
+- **Purpose**: Automate the classification of camera shots (e.g., full-body, medium shot) in extracted video frames
 
-### `application_modele_classification_de_plans(2).ipynb`
-- **Input**: Trained YOLO weights + extracted images
-- **Output**: Images sorted into folders based on predicted shot type
-- **Purpose**: Automatically isolate full-body shots for gesture analysis
+
+### `image_sorting_by_shot_type(2).ipynb`
+- **Input**: Trained YOLOv8 ONNX model + extracted images (organized in subfolders)  
+- **Output**: Images copied into folders based on the predicted shot class  
+- **Purpose**: Automatically isolate full-body shots and other categories for further gesture analysis
+
 
 ### `image_to_csv_keypoints.py`
 - **Input**: Full-body images
