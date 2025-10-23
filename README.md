@@ -28,13 +28,6 @@ The notebooks are organized according to the main steps of analysis:
 - **Purpose**: Automatically isolate full-body shots and other categories for further gesture analysis
 
 
-### `image_to_csv_keypoints.py`
-- **Input**: Full-body images
-- **Output**: One CSV per image with:
-  - x, y coordinates of 17 keypoints (nose, eyes, shoulders, elbows, wrists, hips, knees, ankles)
-  - Bounding box coordinates
-- **Purpose**: Convert images into structured numerical data for statistical analysis
-
 ### `image_sample_to_csv_poses.ipynb`
 - **Input**: A folder containing `.jpg`, `.png`, or `.jpeg` images of full-body screenshots from stand-up shows.  
 - **Output**: One CSV file per image, saved in the output folder, named `image_name-poses_detectees.csv`. Each row contains:  
