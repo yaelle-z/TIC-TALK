@@ -55,7 +55,7 @@ The notebooks are organized according to the main steps of analysis:
 
 ## 1. Topic Modeling
 
-### `stand_up_topic_model_REUSSI.ipynb`
+### `stand_up_topic_model.ipynb`
 - **Input**: Cleaned `.srt` files
 - **Output**:
   - Topic assignment for each time segment
