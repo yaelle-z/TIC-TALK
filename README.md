@@ -55,12 +55,7 @@ The notebooks are organized according to the main steps of analysis:
 
 ## 1. Topic Modeling
 
-### `nettoyage_fichiers_srt.ipynb`
-- **Input**: Raw subtitle files (`.srt`)
-- **Output**: Cleaned `.srt` files (text only, standardized formatting, tags removed)
-- **Purpose**: Prepare subtitles for topic modeling (NLP processing)
-
-### `notebook_topic_model_REUSSI.ipynb`
+### `stand_up_topic_model_REUSSI.ipynb`
 - **Input**: Cleaned `.srt` files
 - **Output**:
   - Topic assignment for each time segment
