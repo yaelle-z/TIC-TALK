@@ -93,20 +93,7 @@ The notebooks are organized according to the main steps of analysis:
   - Confidence score
 - **Purpose**: Automatically detect audience laughter using Whisper-AT
 
-### `calcul_statistique_rire.ipynb`
-- **Input**: Laughter CSV files
-- **Output**: Per-show metrics table (total laughs, total duration, density)
-- **Purpose**: Quantify and compare laugh frequency across performances
 
-### `représentation_rires_dans_le_temps_dapres_srt_sourds.ipynb`
-- **Input**: Subtitle files for the hearing-impaired containing explicit mentions of laughter
-- **Output**: Time-distribution plots of laugh mentions
-- **Purpose**: Compare audio-based laughter detection to subtitle annotations
-
-### `rires_poses_to_statistiques.ipynb`
-- **Input**: Laughter detection results + pose classification data
-- **Output**: Plots and tables crossing laughter density and gesture types
-- **Purpose**: Analyze correlations between body movement and audience response
 
 ---
 
