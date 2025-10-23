@@ -58,10 +58,11 @@ The notebooks are organized according to the main steps of analysis:
   - Visualizations of average poses
 - **Purpose**: Identify recurring postures and describe typical gesture patterns
 
-### `classifications_de_poses_images_trieesenfcduplan_to_modele_to_csv_dimages_trieesenfctdelapose.ipynb`
-- **Input**: Full-body images + pose classification model
-- **Output**: CSV listing each image and the predicted pose class
-- **Purpose**: Refine the gesture typology by classifying all detected postures
+### `from_annotations_to_trained_model_and_classified_images.ipynb`  
+- **Input:** Full-body images + annotation CSV (exported from Label Studio)  
+- **Output:**  
+  - A trained YOLOv8 classification model (`.pt` file)  
+  - A CSV file listing each image and its predicted pose class  
 
 ---
 
