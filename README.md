@@ -12,15 +12,9 @@ The notebooks are organized according to the main steps of analysis:
 
 ## 1. Gesture Analysis (Poses)
 
-### `echantillonage_filemp4_toimages.ipynb`
+### `from_video_to_sampled_images.ipynb.ipynb`
 - **Input**: Raw video files (`.mp4`) from the corpus (not included)
 - **Output**: A series of images extracted at regular intervals (e.g., 1 frame/second)
-- **Purpose**: Generate a representative sample of frames for each show, to be used for annotation and later analysis
-
-### `selection_image_aleatoirement_pour_annoter.ipynb`
-- **Input**: Folder containing the extracted video frames
-- **Output**: Random subsample of images (CSV of selected files + copies in a dedicated folder)
-- **Purpose**: Reduce the number of images to annotate while maintaining diversity in poses and camera shots
 
 ### `yolov8_shot_classifier_training.ipynb`
 - **Input**: Annotated images labeled with shot types + annotation CSV (exported from Label Studio)
