@@ -10,7 +10,7 @@ The notebooks are organized according to the main steps of analysis:
 
 ---
 
-## 1.1 Gesture Analysis (Poses)
+## 1. Gesture Analysis (Poses)
 
 ### `echantillonage_filemp4_toimages.ipynb`
 - **Input**: Raw video files (`.mp4`) from the corpus (not included)
@@ -66,7 +66,7 @@ The notebooks are organized according to the main steps of analysis:
 
 ---
 
-## 1.2 Topic Modeling
+## 1. Topic Modeling
 
 ### `nettoyage_fichiers_srt.ipynb`
 - **Input**: Raw subtitle files (`.srt`)
@@ -83,7 +83,7 @@ The notebooks are organized according to the main steps of analysis:
 
 ---
 
-## 1.3 Laughter Detection
+## 1. Laughter Detection
 
 ### `detection_de_rire_whisper_at.py`
 - **Input**: Audio or video files (`.mp3`, `.wav`, `.mp4`, `.m4a`)
@@ -110,26 +110,5 @@ The notebooks are organized according to the main steps of analysis:
 
 ---
 
-## 1.4 Visualization and Cross-analysis
-
-### `code_visualisation_clustering.ipynb`
-- **Input**:
-  - Laughter: CSV folder per show (`*_laughs.csv`)
-  - Poses: `matrice_poses_par_spectacle_2.csv`
-  - Topics: `matrice_topics_par_spectacle.csv`
-- **Output**:
-  - Distribution plots for each variable (bar plots by show)
-- **Purpose**: Visualize the distribution of laughter, poses, and topics across the entire corpus
-
-### `codecroismentfinalvaribales.ipynb`
-- **Input**:
-  - Laughter CSV per show
-  - Global CSV of classified poses
-- **Output**:
-  - Temporal matrix merging, for each show:
-    - Presence/absence of laughter per second
-    - Dominant gesture per second
-  - Combined time-based visualizations
-- **Purpose**: Jointly observe the dynamics of laughter and gestures over time
 
 
