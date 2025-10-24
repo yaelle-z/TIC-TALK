@@ -22,7 +22,7 @@ The notebooks are organized according to the main steps of analysis:
 - **Purpose**: Automate the classification of camera shots (e.g., full-body, medium shot) in extracted video frames
 
 
-### `image_sorting_by_shot_type(2).ipynb`
+### `image_sorting_by_shot_type.ipynb`
 - **Input**: Trained YOLOv8 ONNX model + extracted images (organized in subfolders)  
 - **Output**: Images copied into folders based on the predicted shot class  
 - **Purpose**: Automatically isolate full-body shots and other categories for further gesture analysis
