@@ -53,7 +53,7 @@ The notebooks are organized according to the main steps of analysis:
 
 ---
 
-## 1. Topic Modeling
+## 2. Topic Modeling
 
 ### `stand_up_topic_model.ipynb`
 - **Input**: Cleaned `.srt` files
@@ -65,15 +65,16 @@ The notebooks are organized according to the main steps of analysis:
 
 ---
 
-## 1. Laughter Detection
+## 3. Laughter Detection
 
-### `detection_de_rire_whisper_at.py`
+### `laugh_detection_whisper_at.py`
 - **Input**: Audio or video files (`.mp3`, `.wav`, `.mp4`, `.m4a`)
-- **Output**: CSV listing each detected laugh with:
+- **Output**: One CSV per show listing each detected laugh with:
   - Start and end timestamps
   - Laughter type (Whisper-AT classification)
   - Confidence score
 - **Purpose**: Automatically detect audience laughter using Whisper-AT
+
 
 
 
