@@ -1,7 +1,6 @@
 # Multimodal Analysis of Stand-up Comedy: Poses, Topics, Laughter
 
 This repository contains **only the final code** of the multimodal analysis project on stand-up comedy.
-Large data files (videos, audio, full `.srt` subtitles), trained models, and heavy intermediate results are hosted separately on a cloud drive.
 
 The notebooks are organized according to the main steps of analysis:
 1. **Gestures (poses)** performed by comedians on stage 
