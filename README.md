@@ -19,11 +19,7 @@ The notebooks and pythons files are organized by modality :
 - **Purpose**: Automate the classification of camera shots (e.g., full-body, medium shot) in extracted video frames
 
 
-### `image_sorting_by_shot_type.ipynb`
-- **Input**: Trained YOLOv8 ONNX model + extracted images (organized in subfolders)  
-- **Output**: Images copied into folders based on the predicted shot class  
-- **Purpose**: Automatically isolate full-body shots and other categories for further gesture analysis
-
+### `application_shot_classifier_from_model_to_csv_per_show.py`
 
 
 
