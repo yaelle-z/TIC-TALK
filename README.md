@@ -23,21 +23,9 @@ The notebooks and pythons files are organized by modality :
 
 
 
-
-
-
-
 ---
 
 ## 2. Text
-
-### `stand_up_topic_model.ipynb`
-- **Input**: Cleaned `.srt` files
-- **Output**:
-  - Topic assignment for each time segment
-  - Visualizations of topic dynamics
-  - CSV export of the results
-- **Purpose**: Identify dominant themes in each special using BERTopic and analyze their temporal evolution
 
 ---
 
