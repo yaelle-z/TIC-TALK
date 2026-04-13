@@ -27,6 +27,9 @@ The notebooks and pythons files are organized by modality :
 
 ## 2. Text
 
+### `codetictalktopic.py`
+
+
 ---
 
 ## 3. Sound
