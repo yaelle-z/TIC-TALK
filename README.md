@@ -1,3 +1,9 @@
+
+This repository contains the code developed for the TIC-TALK project, initiated during Yaelle Zribi’s Digital Humanities master’s thesis at École nationale des chartes – PSL and later extended into an ACL CHum 2026 paper. The project combines image, text and audio pipelines; the topic-modeling/NLP component was developed with Florian Cafiero.
+
+
+
+
 # Multimodal Analysis of Stand-up Comedy: Poses, Topics, Laughter
 
 
