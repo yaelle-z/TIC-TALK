@@ -26,6 +26,9 @@ The notebooks and pythons files are organized by modality :
 
 
 ### `application_shot_classifier_from_model_to_csv_per_show.py`
+- **Input**:  trained YOLOv8 classification weights (.pt) + a folder with one subfolder of sampled frames per show
+- **Output**:one CSV per show with shot label, class id and confidence score
+- **Note**: the sampling interval can be re-chosen at this step with --frame-step (keeps 1 image every N frames, e.g., N = 8 to go from 8 fps to 1 fps)
 
 
 
